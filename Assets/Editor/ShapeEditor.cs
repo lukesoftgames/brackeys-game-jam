@@ -100,6 +100,10 @@ public class ShapeEditor : Editor
         {
             HandleLeftMouseDrag(mousePosition);
         }
+        if (guiEvent.type == EventType.MouseDown && guiEvent.button == 1 && guiEvent.modifiers == EventModifiers.None)
+        {
+            HandleRightButtonDown();
+        }
 
         if (!selectionInfo.pointIsSelected)
         {
@@ -108,6 +112,13 @@ public class ShapeEditor : Editor
 
     }
 
+    void HandleRightButtonDown()
+    {
+        if (selectionInfo.pointIndex >= 0 && selectionInfo.pointIndex < SelectedShape.points.Count)
+            SelectedShape.points.RemoveAt(selectionInfo.pointIndex);
+        if (SelectedShape.points.Count == 0)
+            shapeCreator.shapes.Remove(SelectedShape);
+    }
     void HandleShiftLeftMouseDown(Vector3 mousePosition)
     {
         CreateNewShape();
