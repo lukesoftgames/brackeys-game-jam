@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
         pointsInTime.Add(new PointInTime(this.transform.position, this.transform.rotation));
         GameEvents.current.SendPointsInTime(roundNum, pointsInTime);
         Debug.Log("new position");
-        newPos = new Vector3(Random.Range(-20f, 20f), 2f, Random.Range(-20f, 20f));
+        newPos = new Vector3(Random.Range(50f, 100f), 2f, Random.Range(50f, 100f));
         cc.enabled = false;
         this.transform.localPosition= newPos;
         cc.enabled = true;
