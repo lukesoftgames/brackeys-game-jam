@@ -13,6 +13,7 @@ public class GroundTree : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up * -1), out hit, Mathf.Infinity, layerMask))
         {
             transform.position = hit.point;
+            transform.Rotate(new Vector3(0f, Random.Range(0f, 360f)));
         }
     }
 
