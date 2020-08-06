@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c181f4c3c6e22a6408f125e1ac622d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 60
+  roundTime: 30
 --- !u!114 &80014094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ PrefabInstance:
     - target: {fileID: 839564258341067045, guid: fb488e2c62f53b746ad5d4b1088a30c5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 432.94635
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 839564258341067045, guid: fb488e2c62f53b746ad5d4b1088a30c5,
         type: 3}
@@ -468,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 839564258341067045, guid: fb488e2c62f53b746ad5d4b1088a30c5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 407.68152
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 839564258341067045, guid: fb488e2c62f53b746ad5d4b1088a30c5,
         type: 3}
@@ -518,7 +518,7 @@ PrefabInstance:
     - target: {fileID: 8318263761248583197, guid: fb488e2c62f53b746ad5d4b1088a30c5,
         type: 3}
       propertyPath: respawnArea.x
-      value: 1000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8318263761248583197, guid: fb488e2c62f53b746ad5d4b1088a30c5,
         type: 3}
@@ -528,7 +528,7 @@ PrefabInstance:
     - target: {fileID: 8318263761248583197, guid: fb488e2c62f53b746ad5d4b1088a30c5,
         type: 3}
       propertyPath: respawnArea.z
-      value: 1000
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb488e2c62f53b746ad5d4b1088a30c5, type: 3}

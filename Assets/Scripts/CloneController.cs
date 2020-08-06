@@ -19,6 +19,9 @@ public class CloneController : MonoBehaviour {
     bool inFieldOfVision;
     bool spotted;
 
+
+    float lastLerpT;
+
     Animator animator;
     public float torchlessSpotlight;
 
@@ -71,12 +74,13 @@ public class CloneController : MonoBehaviour {
 
                     // does the clone have line of sight
                     Debug.DrawRay(transform.position, direction.normalized * hit.distance, Color.yellow);
-                    if (hit.transform.gameObject.tag == "Player" && hit.distance < torchlessSpotlight)
+                    if (hit.transform.gameObject.tag == "Player")
                     {
                         return true;
 
                     } else
                     {
+                        Debug.Log(hit.transform.gameObject.name);
                         return false;
                     }
                 }
@@ -142,6 +146,7 @@ public class CloneController : MonoBehaviour {
                     transform.position = Vector3.Lerp(pointsInTime[posIndex].position, pointsInTime[posIndex+1].position, t);
                     transform.rotation = Quaternion.Slerp(pointsInTime[posIndex].rotation, pointsInTime[posIndex + 1].rotation, t);
                     lastRot = transform.rotation;
+                    lastLerpT = t;
                     // Debug.Log(lastPosition);
                     if (t > 1)
                     {
@@ -179,7 +184,7 @@ public class CloneController : MonoBehaviour {
                 Debug.Log(transform.rotation.eulerAngles.y);
             } else
             {
-                t = 0;
+                t = lastLerpT;
                 state = CloneState.WANDERING;
             }
         }
