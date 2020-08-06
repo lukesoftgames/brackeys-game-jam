@@ -25,17 +25,19 @@ public class CloneController : MonoBehaviour {
     float lastLerpT;
 
     Animator animator;
-    public float torchlessSpotlight;
+    public float torchRange;
+    public float shakeIncrease;
 
     public float fieldOfViewAngle;
     public LayerMask layerMask;
     [SerializeField] private float posUpdateTime = 1f;
     Transform playerPos;
     Flashlight flashlight;
-    bool turning;
-    Coroutine smoothMove = null;
+
     Quaternion lastRot;
     CloneState state = CloneState.WANDERING;
+
+    
 
     private void Awake() {
         animator = GetComponent<Animator>();
@@ -45,6 +47,7 @@ public class CloneController : MonoBehaviour {
         GameEvents.current.onRoundEnd += ResetClone;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         flashlight = GameObject.Find("FirstPersonPlayer").GetComponent<Flashlight>();
+
 
     }
 
@@ -76,13 +79,12 @@ public class CloneController : MonoBehaviour {
 
                     // does the clone have line of sight
                     Debug.DrawRay(transform.position, direction.normalized * hit.distance, Color.yellow);
-                    if (hit.transform.gameObject.tag == "Player")
+                    if (hit.transform.gameObject.tag == "Player" && hit.distance < torchRange)
                     {
                         return true;
 
                     } else
                     {
-                        Debug.Log(hit.transform.gameObject.name);
                         return false;
                     }
                 }
@@ -187,7 +189,7 @@ public class CloneController : MonoBehaviour {
                 t += Time.deltaTime;
                 transform.rotation =
                     Quaternion.Slerp(currentRot, lastRot, Time.deltaTime * 5f);
-                Debug.Log(transform.rotation.eulerAngles.y);
+
             } else
             {
                 t = lastLerpT;
@@ -205,16 +207,23 @@ public class CloneController : MonoBehaviour {
 
         if (state == CloneState.LOOKINGATPLAYER)
         {
-            spottedTime += Time.deltaTime;
+            if (spottedTime == 0f)
+            {
+                GameEvents.current.PlayerSpotted();
+            }
+            DISystem.CreateIndicator(transform);
+
             if (spottedTime > 3f)
             {
                 Debug.Log("Game over");
                 GameEvents.current.GameOver();
                 state = CloneState.STOPPED;
             }
+            spottedTime += Time.deltaTime;
         } else
         {
             spottedTime = 0f;
+            GameEvents.current.PlayerSafe();
         }
 
     }

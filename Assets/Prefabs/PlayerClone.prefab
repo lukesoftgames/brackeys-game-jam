@@ -203,7 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1116edb08ac8643984080c3cb13f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torchlessSpotlight: 10
+  torchRange: 20
+  shakeIncrease: 0.1
   fieldOfViewAngle: 90
   layerMask:
     serializedVersion: 2

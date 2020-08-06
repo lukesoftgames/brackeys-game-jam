@@ -7,7 +7,10 @@ public class Flashlight : MonoBehaviour
     public bool lightOn = true;
     public Light light;
 
-
+    public void SetColor(Color color)
+    {
+        light.color = color;
+    }
     private void Start()
     {
         light.gameObject.SetActive(lightOn);        
