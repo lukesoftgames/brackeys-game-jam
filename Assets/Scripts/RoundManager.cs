@@ -20,6 +20,7 @@ public class RoundManager : MonoBehaviour {
     private void Start() {
         roundNum = 0;
         GameEvents.current.onTimerEnd += EndRound;
+
     }
 
     private void EndRound() {

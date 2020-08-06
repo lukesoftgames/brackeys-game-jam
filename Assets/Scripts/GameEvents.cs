@@ -31,6 +31,16 @@ public class GameEvents : MonoBehaviour {
         }
     }
 
+    public event Action onGameOver;
+    public void GameOver()
+    {
+        if (onGameOver != null)
+        {
+            onGameOver();
+        }
+    }
+
+
     public event Action<int,List<PointInTime>> onSendPointsInTime;
     public void SendPointsInTime(int cloneId, List<PointInTime> curPointsInTime) {
         if (onSendPointsInTime != null) {

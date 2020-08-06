@@ -9,6 +9,7 @@ public enum CloneState
     TURNINGTOPLAYER,
     LOOKINGATPLAYER,
     RETURNINGTOWALK,
+    STOPPED
 }
 
 public class CloneController : MonoBehaviour {
@@ -19,6 +20,7 @@ public class CloneController : MonoBehaviour {
     bool inFieldOfVision;
     bool spotted;
 
+    float spottedTime;
 
     float lastLerpT;
 
@@ -116,6 +118,10 @@ public class CloneController : MonoBehaviour {
     }
    
     private void Update() {
+        if (state == CloneState.STOPPED)
+        {
+            return;
+        }
         if (inFieldOfVision)
         {
             bool nextState = CanSeePlayer();
@@ -195,6 +201,20 @@ public class CloneController : MonoBehaviour {
         } else
         {
             animator.SetBool("isIdle", false);
+        }
+
+        if (state == CloneState.LOOKINGATPLAYER)
+        {
+            spottedTime += Time.deltaTime;
+            if (spottedTime > 3f)
+            {
+                Debug.Log("Game over");
+                GameEvents.current.GameOver();
+                state = CloneState.STOPPED;
+            }
+        } else
+        {
+            spottedTime = 0f;
         }
 
     }
