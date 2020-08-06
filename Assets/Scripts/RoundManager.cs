@@ -25,7 +25,7 @@ public class RoundManager : MonoBehaviour {
     private void EndRound() {
         GameObject newClone = Instantiate(clone);
         newClone.GetComponent<CloneController>().setCloneID(roundNum);
-
+        Debug.Log("END ROUND");
         GameEvents.current.RoundEnd(roundNum);
 
         roundNum += 1;

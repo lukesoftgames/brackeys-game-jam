@@ -54,7 +54,7 @@ public static class PoissonDiscSampling
 				{
 					points.Add(candidate);
 					spawnPoints.Add(candidate);
-					Debug.Log((candidate.x - sampleEnd.x)/ cellSize);
+
 					grid[(int)((candidate.x - sampleEnd.x) / cellSize), (int)((candidate.y - sampleEnd.y) / cellSize)] = points.Count;
 					candidateAccepted = true;
 					break;
