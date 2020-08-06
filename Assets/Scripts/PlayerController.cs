@@ -7,8 +7,12 @@ public class PlayerController : MonoBehaviour {
     private CharacterController cc;
     private List<PointInTime> pointsInTime;
     [SerializeField] private float posUpdateTime=1f;
-    private float timeLeft;
+    [SerializeField] private float shakeIncrease = 0.1f;
+    [SerializeField] private float shakeMax = 1f;
+    [SerializeField] private float shakeDecrease = 0.3f;
 
+    private float timeLeft;
+    Coroutine spotted;
 
     public Vector3 respawnArea;
 
@@ -17,6 +21,46 @@ public class PlayerController : MonoBehaviour {
         timeLeft = 0;
         cc=this.GetComponent<CharacterController>();
         GameEvents.current.onRoundEnd += ResetPosition;
+        GameEvents.current.onGameOver += () =>
+        {
+            CameraShake.current.StopShake();
+            if (spotted != null)
+            {
+                StopCoroutine(spotted);
+            }
+        };
+        GameEvents.current.onPlayerSpotted += PlayerSpotted;
+        GameEvents.current.onPlayerSafe += PlayerSafe;
+
+    }
+
+    IEnumerator Spotted()
+    {
+        while (CameraShake.current.magnitude < shakeMax)
+        {
+            CameraShake.current.magnitude += Time.deltaTime * shakeIncrease;
+            yield return null;
+        }
+    }
+
+    IEnumerator Safe()
+    {
+        while (CameraShake.current.magnitude > 0f)
+        {
+            CameraShake.current.magnitude -= Time.deltaTime * shakeDecrease;
+            yield return null;
+        }
+        CameraShake.current.StopShake();
+    }
+    void PlayerSafe()
+    {
+        StartCoroutine(Safe());
+    }
+
+    void PlayerSpotted()
+    {
+        CameraShake.current.StartShake();
+        StartCoroutine(Spotted());
     }
 
     private void OnDrawGizmos()

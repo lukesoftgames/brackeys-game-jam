@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   torchlessSpotlight: 10
+  shakeIncrease: 0.1
   fieldOfViewAngle: 90
   layerMask:
     serializedVersion: 2
