@@ -2243,9 +2243,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   posUpdateTime: 1
   shakeIncrease: 0.1
-  shakeMax: 1
+  shakeMax: 0.5
   shakeDecrease: 0.3
-  respawnArea: {x: 200, y: 1, z: 200}
+  respawnArea: {x: 50, y: 1, z: 50}
 --- !u!114 &8318263761075381655
 MonoBehaviour:
   m_ObjectHideFlags: 0

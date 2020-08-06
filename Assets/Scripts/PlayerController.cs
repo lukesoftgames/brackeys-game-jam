@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
     private float timeLeft;
     Coroutine spotted;
+    int spottedCount = 0;
 
     public Vector3 respawnArea;
 
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Spotted()
     {
+       
         while (CameraShake.current.magnitude < shakeMax)
         {
             CameraShake.current.magnitude += Time.deltaTime * shakeIncrease;
@@ -54,13 +56,23 @@ public class PlayerController : MonoBehaviour {
     }
     void PlayerSafe()
     {
-        StartCoroutine(Safe());
+        if (spotted != null)
+        {
+            StopCoroutine(spotted);
+        }
+        Debug.Log("Safe");
+        spotted = StartCoroutine(Safe());
     }
 
     void PlayerSpotted()
     {
+        if (spotted != null)
+        {
+            StopCoroutine(spotted);
+        }
+        Debug.Log("Spotted");
         CameraShake.current.StartShake();
-        StartCoroutine(Spotted());
+        spotted = StartCoroutine(Spotted());
     }
 
     private void OnDrawGizmos()
