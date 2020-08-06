@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -23,7 +21,9 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpModifier = 2f;
 
-    
+    public float interactRadius = 1000f;
+
+
 
 
     // Start is called before the first frame update
@@ -68,5 +68,18 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += (gravity * Time.deltaTime);
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            Debug.Log("pressed interact");
+            Collider[] hits = Physics.OverlapSphere(transform.position, interactRadius);
+            foreach (Collider hit in hits) {
+                Debug.Log(hit.transform.name);
+                if (hit.gameObject.GetComponent<IInteractable>() != null) {
+                    hit.gameObject.GetComponent<IInteractable>().interact(gameObject);
+
+                    break;
+                }
+            }
+        }
     }
 }

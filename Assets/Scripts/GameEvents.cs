@@ -38,4 +38,11 @@ public class GameEvents : MonoBehaviour {
         }
     }
 
+    public event Action onInteract;
+    public void Interact() {
+        if (onInteract != null) {
+            onInteract();
+        }
+    }
+
 }
