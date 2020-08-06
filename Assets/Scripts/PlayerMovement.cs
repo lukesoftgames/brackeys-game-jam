@@ -23,12 +23,13 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpModifier = 2f;
 
+    private AudioSource walking;
     
-
 
     // Start is called before the first frame update
     void Awake()
     {
+        walking = GetComponent<AudioSource>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -64,6 +65,14 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
+        if (move.sqrMagnitude == 0f && walking.isPlaying)
+        {
+            walking.Stop();
+        }
+        if (move.sqrMagnitude > 0f && !walking.isPlaying)
+        {
+            walking.Play();
+        }
         controller.Move(move * speed * Time.deltaTime);
 
         velocity.y += (gravity * Time.deltaTime);

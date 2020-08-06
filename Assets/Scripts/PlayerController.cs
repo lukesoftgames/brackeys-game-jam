@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour {
         {
             StopCoroutine(spotted);
         }
-        Debug.Log("Safe");
+
         spotted = StartCoroutine(Safe());
     }
 
@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour {
         {
             StopCoroutine(spotted);
         }
-        Debug.Log("Spotted");
         CameraShake.current.StartShake();
         spotted = StartCoroutine(Spotted());
     }

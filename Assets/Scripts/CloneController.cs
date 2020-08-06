@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 
@@ -37,9 +38,11 @@ public class CloneController : MonoBehaviour {
     Quaternion lastRot;
     CloneState state = CloneState.WANDERING;
 
-    
+    AudioSource walkingSound;
 
     private void Awake() {
+        walkingSound = GetComponent<AudioSource>();
+        walkingSound.pitch = Random.Range(0.5f, 1.2f);
         animator = GetComponent<Animator>();
         posIndex = 0;
         pointsInTime = new List<PointInTime>();
@@ -151,7 +154,16 @@ public class CloneController : MonoBehaviour {
                     //Debug.Log("initial" + pointsInTime[posIndex].rotation);
                     //Debug.Log("next" + pointsInTime[posIndex+1].rotation);
                     t += Time.deltaTime / posUpdateTime;
-                    transform.position = Vector3.Lerp(pointsInTime[posIndex].position, pointsInTime[posIndex+1].position, t);
+                    Vector3 move = Vector3.Lerp(pointsInTime[posIndex].position, pointsInTime[posIndex+1].position, t);
+                    float diff = (move - transform.position).sqrMagnitude;
+                    if (diff == 0f && walkingSound.isPlaying)
+                    {
+                        walkingSound.Stop();
+                    } else if (diff > 0f && !walkingSound.isPlaying)
+                    {
+                        walkingSound.Play();
+                    }
+                    transform.position = move;
                     transform.rotation = Quaternion.Slerp(pointsInTime[posIndex].rotation, pointsInTime[posIndex + 1].rotation, t);
                     lastRot = transform.rotation;
                     lastLerpT = t;
@@ -199,6 +211,7 @@ public class CloneController : MonoBehaviour {
         
         if (state != CloneState.WANDERING)
         {
+            walkingSound.Stop();
             animator.SetBool("isIdle", true);
         } else
         {
