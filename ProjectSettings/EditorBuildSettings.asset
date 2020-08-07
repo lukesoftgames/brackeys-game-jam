@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 01e26c3eedc1a754d9a24eafcdf1f1cc
+  - enabled: 1
+    path: Assets/Scenes/SpookyWoodFull.unity
+    guid: 31145de84284e01409bdfeaa116c8f28
   m_configObjects: {}
