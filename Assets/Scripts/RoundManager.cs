@@ -55,5 +55,6 @@ public class RoundManager : MonoBehaviour {
         GameEvents.current.RoundEnd(roundNum);
 
         roundNum += 1;
+        this.GetComponent<RoundTimer>().setFirstRound(false);
     }
 }

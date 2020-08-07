@@ -9,6 +9,6 @@ public class Target : MonoBehaviour, IInteractable {
         pickedup = true;
         GameEvents.current.Pickup(this.gameObject);
         this.gameObject.SetActive(false);
-        Destroy(this);
+        //Destroy(this);
     }
 }

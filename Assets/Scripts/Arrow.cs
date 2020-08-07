@@ -27,7 +27,7 @@ public class Arrow : MonoBehaviour {
                 }
             }
         }
-
+        Debug.Log(closestTarget.gameObject.name);
         Vector3 targetPosition = closestTarget.transform.position;
         targetPosition.y = transform.position.y;
         transform.LookAt(targetPosition);

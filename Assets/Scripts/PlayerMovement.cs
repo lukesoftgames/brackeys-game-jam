@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private AudioSource walking;
 
-    public float interactRadius = 1000f;
+    public float interactRadius = 1f;
 
 
 
