@@ -15,9 +15,15 @@ public class CheckList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.SetActive(true);
         GameEvents.current.onPickup += HandlePickUp;
+        GameEvents.current.onGameOver += Hide;
+        GameEvents.current.onWin += Hide;
     }
-
+    void Hide()
+    {
+        gameObject.SetActive(false);
+    }
     void HandlePickUp(GameObject g)
     {
         Debug.Log("Check list");

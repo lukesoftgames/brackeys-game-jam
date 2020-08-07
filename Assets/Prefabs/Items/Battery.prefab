@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickedup: 0
+  code: battery
 --- !u!65 &3337399023743860323
 BoxCollider:
   m_ObjectHideFlags: 0
