@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2400818377320709057}
   m_Layer: 0
   m_Name: Crowbar
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb394310806648146b8a325eaf1b200c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickedup: 0
+  code: crowbar
 --- !u!1001 &2976083699987102927
 PrefabInstance:
   m_ObjectHideFlags: 0
