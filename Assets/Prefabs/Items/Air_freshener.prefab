@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 357031125208116679}
   - component: {fileID: 4506487512293436111}
   m_Layer: 0
-  m_Name: Air_Freshener
+  m_Name: Air_freshener
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickedup: 0
+  code: airfresh
 --- !u!114 &4506487512293436111
 MonoBehaviour:
   m_ObjectHideFlags: 0

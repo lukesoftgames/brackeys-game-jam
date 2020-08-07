@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickedup: 0
+  code: wheel
 --- !u!114 &857717129121914641
 MonoBehaviour:
   m_ObjectHideFlags: 0

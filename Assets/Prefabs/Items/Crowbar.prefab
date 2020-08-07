@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickedup: 0
+  code: crowbar
 --- !u!1 &6454259245020257666
 GameObject:
   m_ObjectHideFlags: 0
