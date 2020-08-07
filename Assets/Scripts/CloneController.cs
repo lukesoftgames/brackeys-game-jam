@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 
@@ -9,6 +10,7 @@ public enum CloneState
     TURNINGTOPLAYER,
     LOOKINGATPLAYER,
     RETURNINGTOWALK,
+    STOPPED
 }
 
 public class CloneController : MonoBehaviour {
@@ -19,23 +21,28 @@ public class CloneController : MonoBehaviour {
     bool inFieldOfVision;
     bool spotted;
 
+    float spottedTime;
 
     float lastLerpT;
 
     Animator animator;
-    public float torchlessSpotlight;
+    public float torchRange;
+    public float shakeIncrease;
 
     public float fieldOfViewAngle;
     public LayerMask layerMask;
     [SerializeField] private float posUpdateTime = 1f;
     Transform playerPos;
     Flashlight flashlight;
-    bool turning;
-    Coroutine smoothMove = null;
+
     Quaternion lastRot;
     CloneState state = CloneState.WANDERING;
 
+    AudioSource walkingSound;
+
     private void Awake() {
+        walkingSound = GetComponent<AudioSource>();
+        walkingSound.pitch = Random.Range(0.5f, 1.2f);
         animator = GetComponent<Animator>();
         posIndex = 0;
         pointsInTime = new List<PointInTime>();
@@ -43,6 +50,7 @@ public class CloneController : MonoBehaviour {
         GameEvents.current.onRoundEnd += ResetClone;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         flashlight = GameObject.Find("FirstPersonPlayer").GetComponent<Flashlight>();
+
 
     }
 
@@ -74,13 +82,12 @@ public class CloneController : MonoBehaviour {
 
                     // does the clone have line of sight
                     Debug.DrawRay(transform.position, direction.normalized * hit.distance, Color.yellow);
-                    if (hit.transform.gameObject.tag == "Player")
+                    if (hit.transform.gameObject.tag == "Player" && hit.distance < torchRange)
                     {
                         return true;
 
                     } else
                     {
-                        Debug.Log(hit.transform.gameObject.name);
                         return false;
                     }
                 }
@@ -116,6 +123,10 @@ public class CloneController : MonoBehaviour {
     }
    
     private void Update() {
+        if (state == CloneState.STOPPED)
+        {
+            return;
+        }
         if (inFieldOfVision)
         {
             bool nextState = CanSeePlayer();
@@ -143,7 +154,16 @@ public class CloneController : MonoBehaviour {
                     //Debug.Log("initial" + pointsInTime[posIndex].rotation);
                     //Debug.Log("next" + pointsInTime[posIndex+1].rotation);
                     t += Time.deltaTime / posUpdateTime;
-                    transform.position = Vector3.Lerp(pointsInTime[posIndex].position, pointsInTime[posIndex+1].position, t);
+                    Vector3 move = Vector3.Lerp(pointsInTime[posIndex].position, pointsInTime[posIndex+1].position, t);
+                    float diff = (move - transform.position).sqrMagnitude;
+                    if (diff == 0f && walkingSound.isPlaying)
+                    {
+                        walkingSound.Stop();
+                    } else if (diff > 0f && !walkingSound.isPlaying)
+                    {
+                        walkingSound.Play();
+                    }
+                    transform.position = move;
                     transform.rotation = Quaternion.Slerp(pointsInTime[posIndex].rotation, pointsInTime[posIndex + 1].rotation, t);
                     lastRot = transform.rotation;
                     lastLerpT = t;
@@ -181,7 +201,7 @@ public class CloneController : MonoBehaviour {
                 t += Time.deltaTime;
                 transform.rotation =
                     Quaternion.Slerp(currentRot, lastRot, Time.deltaTime * 5f);
-                Debug.Log(transform.rotation.eulerAngles.y);
+
             } else
             {
                 t = lastLerpT;
@@ -191,10 +211,32 @@ public class CloneController : MonoBehaviour {
         
         if (state != CloneState.WANDERING)
         {
+            walkingSound.Stop();
             animator.SetBool("isIdle", true);
         } else
         {
             animator.SetBool("isIdle", false);
+        }
+
+        if (state == CloneState.LOOKINGATPLAYER)
+        {
+            if (spottedTime == 0f)
+            {
+                GameEvents.current.PlayerSpotted();
+            }
+            DISystem.CreateIndicator(transform);
+
+            if (spottedTime > 3f)
+            {
+                Debug.Log("Game over");
+                GameEvents.current.GameOver();
+                state = CloneState.STOPPED;
+            }
+            spottedTime += Time.deltaTime;
+        } else
+        {
+            spottedTime = 0f;
+            GameEvents.current.PlayerSafe();
         }
 
     }

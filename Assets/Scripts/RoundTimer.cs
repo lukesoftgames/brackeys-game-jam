@@ -6,11 +6,19 @@ public class RoundTimer : MonoBehaviour {
     [SerializeField] private float roundTime = 60;
     private float timeLeft;
 
+    bool running = true;
+
     private void Start() {
         Debug.Log("start");
         GameEvents.current.onRoundEnd += ResetTimer;
+        GameEvents.current.onGameOver += StopTimer;
         timeLeft = roundTime;
 
+    }
+
+    void StopTimer()
+    {
+        running = false;
     }
     
     private void ResetTimer(int roundNum) {
@@ -24,9 +32,12 @@ public class RoundTimer : MonoBehaviour {
     }
 
     private void Update() {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft < 0) {
-            EndTimer();
+        if (running)
+        {
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 0) {
+                EndTimer();
+            }
         }
     }
 

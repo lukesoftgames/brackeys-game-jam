@@ -24,12 +24,40 @@ public class GameEvents : MonoBehaviour {
         }
     }
 
+    public event Action onPlayerSpotted;
+    public void PlayerSpotted()
+    {
+        if (onPlayerSpotted != null)
+        {
+            onPlayerSpotted();
+        }
+    }
+
+    public event Action onPlayerSafe;
+    public void PlayerSafe()
+    {
+        if (onPlayerSafe != null)
+        {
+            onPlayerSafe();
+        }
+    }
+
     public event Action<int> onRoundEnd;
     public void RoundEnd(int roundNum) {
         if (onRoundEnd != null) {
             onRoundEnd(roundNum);
         }
     }
+
+    public event Action onGameOver;
+    public void GameOver()
+    {
+        if (onGameOver != null)
+        {
+            onGameOver();
+        }
+    }
+
 
     public event Action<int,List<PointInTime>> onSendPointsInTime;
     public void SendPointsInTime(int cloneId, List<PointInTime> curPointsInTime) {

@@ -21,14 +21,16 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpModifier = 2f;
 
-    public float interactRadius = 1000f;
+    private AudioSource walking;
 
+    public float interactRadius = 1000f;
 
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        walking = GetComponent<AudioSource>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -36,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        
+
         if (velocity.y < 0)
         {
             if (isGrounded)
@@ -53,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Jump stuff
-        
+
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -64,6 +66,14 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
+        if (move.sqrMagnitude == 0f && walking.isPlaying)
+        {
+            walking.Stop();
+        }
+        if (move.sqrMagnitude > 0f && !walking.isPlaying)
+        {
+            walking.Play();
+        }
         controller.Move(move * speed * Time.deltaTime);
 
         velocity.y += (gravity * Time.deltaTime);
