@@ -11,13 +11,19 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float shakeMax = 1f;
     [SerializeField] private float shakeDecrease = 0.3f;
 
+    [SerializeField] private float volumeIncrease = 0.1f;
+
+
     private float timeLeft;
     Coroutine spotted;
     int spottedCount = 0;
 
+    public AudioSource rumble;
+    public AudioSource thump;
     public Vector3 respawnArea;
 
     private void Start() {
+        rumble.volume = 0f;
         pointsInTime = new List<PointInTime>();
         timeLeft = 0;
         cc=this.GetComponent<CharacterController>();
@@ -29,6 +35,8 @@ public class PlayerController : MonoBehaviour {
             {
                 StopCoroutine(spotted);
             }
+            thump.Play();
+            rumble.Stop();
         };
         GameEvents.current.onPlayerSpotted += PlayerSpotted;
         GameEvents.current.onPlayerSafe += PlayerSafe;
@@ -40,6 +48,14 @@ public class PlayerController : MonoBehaviour {
        
         while (CameraShake.current.magnitude < shakeMax)
         {
+            if (rumble.volume < 1f)
+            {
+                rumble.volume += Time.deltaTime * volumeIncrease;
+            }
+           
+           
+           rumble.pitch += Time.deltaTime * volumeIncrease;
+            
             CameraShake.current.magnitude += Time.deltaTime * shakeIncrease;
             yield return null;
         }
@@ -49,6 +65,14 @@ public class PlayerController : MonoBehaviour {
     {
         while (CameraShake.current.magnitude > 0f)
         {
+            if (rumble.volume > 0f)
+            {
+                rumble.volume -= Time.deltaTime * volumeIncrease * 3f;
+            }
+            if (rumble.pitch > 1f)
+            {
+                rumble.pitch -= Time.deltaTime * volumeIncrease;
+            }
             CameraShake.current.magnitude -= Time.deltaTime * shakeDecrease;
             yield return null;
         }
@@ -66,6 +90,10 @@ public class PlayerController : MonoBehaviour {
 
     void PlayerSpotted()
     {
+        if (!rumble.isPlaying)
+        {
+            rumble.Play();
+        }
         if (spotted != null)
         {
             StopCoroutine(spotted);
