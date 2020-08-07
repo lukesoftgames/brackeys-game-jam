@@ -66,4 +66,25 @@ public class GameEvents : MonoBehaviour {
         }
     }
 
+    public event Action onInteract;
+    public void Interact() {
+        if (onInteract != null) {
+            onInteract();
+        }
+    }
+
+    public event Action<GameObject> onPickup;
+    public void Pickup(GameObject curObj) {
+        if (onPickup != null) {
+            onPickup(curObj);
+        }
+    }
+
+    public event Action onWin;
+    public void Win() {
+        if (onWin != null) {
+            onWin();
+        }
+    }
+
 }

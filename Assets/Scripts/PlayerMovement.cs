@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -23,8 +21,11 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpModifier = 2f;
 
-    public AudioSource walking;
-    
+    private AudioSource walking;
+
+    public float interactRadius = 1000f;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        
+
         if (velocity.y < 0)
         {
             if (isGrounded)
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Jump stuff
-        
+
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -77,5 +78,18 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += (gravity * Time.deltaTime);
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            Debug.Log("pressed interact");
+            Collider[] hits = Physics.OverlapSphere(transform.position, interactRadius);
+            foreach (Collider hit in hits) {
+                Debug.Log(hit.transform.name);
+                if (hit.gameObject.GetComponent<IInteractable>() != null) {
+                    hit.gameObject.GetComponent<IInteractable>().interact(gameObject);
+
+                    break;
+                }
+            }
+        }
     }
 }
