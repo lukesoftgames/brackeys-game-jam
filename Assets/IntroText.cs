@@ -27,14 +27,14 @@ public class IntroText : MonoBehaviour
         yield return new WaitForSeconds(3f);
         textBox.text = "11:13PM\n11/07/1979";
         yield return new WaitForSeconds(5f);
-        textBox.text = "A COUNTRY ROAD NEAR EDINBURGH\nSCOTLAND";
+        textBox.text = "A COUNTRY ROAD NEAR EDINBURGH, SCOTLAND";
         yield return new WaitForSeconds(5f);
         textBox.text = "";
         yield return new WaitForSeconds(5f);
         textBox.text = "\"WHAT? COME ON!\"";
         yield return new WaitForSeconds(2f);
         // 20 seconds
-        textBox.text = "\"UCH\"";
+        textBox.text = "\"UGH\"";
         yield return new WaitForSeconds(3f);
         //23 seconds
         textBox.text = "";
