@@ -10,14 +10,21 @@ public class Arrow : MonoBehaviour {
 
     private void FindClosesetTarget() {
         float distanceToClosestTarget = Mathf.Infinity;
-        Target closestTarget = null;
+        GameObject closestTarget = null;
         Target[] allTargets = GameObject.FindObjectsOfType<Target>();
-        
-        foreach (Target curTarget in allTargets) {
-            float dist = (curTarget.transform.position - this.transform.position).sqrMagnitude;
-            if (dist < distanceToClosestTarget) {
-                distanceToClosestTarget = dist;
-                closestTarget = curTarget;
+        if (allTargets.Length<1) {
+            CarTarget car = GameObject.FindObjectOfType<CarTarget>();
+            if (car == null) {
+                return;
+            }
+            closestTarget = car.gameObject;
+        } else {
+            foreach (Target curTarget in allTargets) {
+                float dist = (curTarget.transform.position - this.transform.position).sqrMagnitude;
+                if (dist < distanceToClosestTarget) {
+                    distanceToClosestTarget = dist;
+                    closestTarget = curTarget.gameObject;
+                }
             }
         }
 

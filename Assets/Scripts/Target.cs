@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Target : MonoBehaviour, IInteractable {
+    public bool pickedup = false;
     public void interact(GameObject interactor) {
         Debug.Log("INTERACTING");
-        Destroy(this.gameObject);
+        pickedup = true;
+        GameEvents.current.Pickup(this.gameObject);
+        this.gameObject.SetActive(false);
+        Destroy(this);
     }
 }
