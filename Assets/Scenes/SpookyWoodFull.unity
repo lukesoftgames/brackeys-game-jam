@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundTime: 30
+  countdownText: {fileID: 0}
 --- !u!114 &80014094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f19d073abceb34991403d26e541c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetsObjects: []
   clone: {fileID: 5286817715393542964, guid: 85df82191429dc8498206d43d3326670, type: 3}
+  car: {fileID: 0}
 --- !u!4 &80014095
 Transform:
   m_ObjectHideFlags: 0
@@ -710,10 +713,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e231b285bad3fd547961761d3ae70593, type: 3}
-    m_FontSize: 80
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 0
     m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -721,7 +724,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GAME OVER
+  m_Text: YOU ESCAPE THE FOREST
 --- !u!222 &548029315
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1289,6 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1155157404}
+  gameOverText: {fileID: 548029314}
 --- !u!1 &1145535104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,7 +1739,7 @@ GameObject:
   - component: {fileID: 1389379180}
   - component: {fileID: 1389379179}
   m_Layer: 5
-  m_Name: MENU
+  m_Name: Return to Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2245,7 +2249,7 @@ GameObject:
   - component: {fileID: 2086532490}
   - component: {fileID: 2086532489}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: Backdrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2607,7 +2611,7 @@ MonoBehaviour:
   jumpHeight: 5
   fallMultiplier: 4
   lowJumpModifier: 2
-  walking: {fileID: 0}
+  interactRadius: 1
 --- !u!136 &8177962280024266141
 CapsuleCollider:
   m_ObjectHideFlags: 0
