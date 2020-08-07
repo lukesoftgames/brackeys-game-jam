@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpModifier = 2f;
 
-    private AudioSource walking;
+    public AudioSource walking;
     
 
     // Start is called before the first frame update
