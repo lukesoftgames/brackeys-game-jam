@@ -24,7 +24,7 @@ public class RoundManager : MonoBehaviour {
 
     private void Start() {
         roundNum = 0;
-        GameEvents.current.onTimerEnd += EndRound;
+        GameEvents.current.onFlash += EndRound;
         GameEvents.current.onPickup += CheckCar;
         targets = new List<GameObject>();
         //car.GetComponent<CarTarget>().enabled = false;
