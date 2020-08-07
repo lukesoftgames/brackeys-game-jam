@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &934813929844922870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934813929844922864}
+  - component: {fileID: 934813929844922871}
+  - component: {fileID: 934813929844922865}
+  m_Layer: 0
+  m_Name: TreeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &934813929844922864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934813929844922870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 534.19214, y: 61.985435, z: 349.385}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &934813929844922871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934813929844922870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abeea0131b692964893fb3fb64809df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shapes:
+  - points:
+    - {x: 29.895355, y: -0.000061035156, z: 251.07138}
+    - {x: 19.580383, y: 0.000061035156, z: 103.189804}
+    - {x: 33.33618, y: 0, z: 32.68625}
+    - {x: 143.38712, y: 0.000061035156, z: 39.56424}
+    - {x: 257.4176, y: 0, z: 31.427727}
+    - {x: 381.00854, y: 0, z: 43.083046}
+    - {x: 488.966, y: 0, z: 43.06665}
+    - {x: 450.4705, y: 0, z: 293.28854}
+    - {x: 413.81964, y: 0.000015258789, z: 398.5788}
+    - {x: 364.08182, y: 0, z: 589.772}
+    - {x: 132.15686, y: 0, z: 561.663}
+    - {x: 65.09297, y: 0, z: 518.1311}
+    - {x: 47.092133, y: -0.000061035156, z: 347.36636}
+  - points:
+    - {x: 83.64984, y: 0, z: 975.4174}
+    - {x: 29.878845, y: 0, z: 921.6465}
+    - {x: 34.764404, y: 0, z: 760.3337}
+    - {x: 130.08493, y: 0, z: 723.672}
+    - {x: 225.4054, y: 0, z: 753.00024}
+    - {x: 266.95508, y: 0, z: 848.3233}
+    - {x: 249.8482, y: 0, z: 948.532}
+    - {x: 210.74384, y: 0, z: 970.52924}
+  - points:
+    - {x: 514.0577, y: 0, z: 962.3338}
+    - {x: 429.29315, y: 0, z: 946.07654}
+    - {x: 400.1348, y: 0, z: 900.4809}
+    - {x: 421.68216, y: 0, z: 852.6641}
+    - {x: 480.8608, y: 0, z: 862.9151}
+    - {x: 598.4951, y: 0, z: 857.99854}
+    - {x: 731.6581, y: 0, z: 864.09296}
+    - {x: 885.82886, y: 0, z: 734.1167}
+    - {x: 940.5137, y: 0, z: 735.31635}
+    - {x: 931.3992, y: 0, z: 802.94244}
+    - {x: 941.6859, y: 0, z: 951.06104}
+    - {x: 687.5989, y: 0, z: 965.29315}
+  - points:
+    - {x: 632.6194, y: 0, z: 155.7142}
+    - {x: 552.9217, y: 0, z: 220.1815}
+    - {x: 548.03125, y: 0, z: 122.41559}
+    - {x: 599.3566, y: 0, z: 29.540344}
+    - {x: 667.7944, y: 0, z: 29.540375}
+    - {x: 738.6722, y: 0, z: 27.095093}
+    - {x: 897.5447, y: 0, z: 39.316437}
+    - {x: 926.87305, y: 0, z: 305.72595}
+    - {x: 956.20105, y: 0, z: 493.92426}
+    - {x: 939.09424, y: 0, z: 606.3542}
+    - {x: 941.53955, y: 0, z: 728.5602}
+    - {x: 885.97253, y: 0, z: 728.5504}
+    - {x: 858.19, y: 0, z: 536.36755}
+    - {x: 809.2682, y: 0, z: 363.0951}
+    - {x: 822.28644, y: 0, z: 279.1627}
+    - {x: 776.35583, y: 0, z: 185.58495}
+  - points:
+    - {x: 540.70874, y: 0, z: 130.36646}
+    - {x: 515.9716, y: 0, z: 138.58829}
+    - {x: 447.69785, y: 0, z: 410.67703}
+    - {x: 557.513, y: 0, z: 445.39362}
+    - {x: 569.8229, y: 0, z: 389.37756}
+    - {x: 576.9182, y: 0, z: 306.9791}
+    - {x: 546.97754, y: 0, z: 248.49532}
+  handleRadius: 4
+--- !u!114 &934813929844922865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934813929844922870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb2b7cb40fa9114b8653c80104345ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree: {fileID: 4104888784795654482, guid: 1c440ed82c1ebc94992f763556f3f1fa, type: 3}
+  radius: 6
+  regionSize: {x: 1000, y: 500, z: 5}
+  rejectionSamples: 30
+  displayRadius: 1
