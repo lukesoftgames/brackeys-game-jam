@@ -8,7 +8,7 @@ public class RoundManager : MonoBehaviour {
     public GameObject[] targetsObjects;
     private List<GameObject> targets;
     [SerializeField] private GameObject clone;
-    private float border = 950f;
+    private float border = 100f;
     private bool goToCar;
     public GameObject car;
     private void Awake() {
@@ -24,7 +24,7 @@ public class RoundManager : MonoBehaviour {
 
     private void Start() {
         roundNum = 0;
-        GameEvents.current.onTimerEnd += EndRound;
+        GameEvents.current.onFlash += EndRound;
         GameEvents.current.onPickup += CheckCar;
         targets = new List<GameObject>();
         //car.GetComponent<CarTarget>().enabled = false;

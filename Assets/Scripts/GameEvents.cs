@@ -24,6 +24,15 @@ public class GameEvents : MonoBehaviour {
         }
     }
 
+    public event Action onFlash;
+    public void Flash()
+    {
+        if (onFlash != null)
+        {
+            onFlash();
+        }
+    }
+
     public event Action onPlayerSpotted;
     public void PlayerSpotted()
     {
@@ -41,6 +50,8 @@ public class GameEvents : MonoBehaviour {
             onPlayerSafe();
         }
     }
+
+
 
     public event Action<int> onRoundEnd;
     public void RoundEnd(int roundNum) {
