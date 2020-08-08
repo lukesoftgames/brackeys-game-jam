@@ -15,12 +15,15 @@ public class RoundTimer : MonoBehaviour {
         Debug.Log("start");
         GameEvents.current.onRoundEnd += ResetTimer;
         GameEvents.current.onGameOver += StopTimer;
+        GameEvents.current.onWin += StopTimer;
+
         timeLeft = roundTime;
 
     }
 
     void StopTimer()
     {
+        countdownText.gameObject.SetActive(false);
         running = false;
     }
     

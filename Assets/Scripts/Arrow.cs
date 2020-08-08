@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour {
 
+    bool show = false;
+    public MeshRenderer rend;
     private void Update() {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            rend.enabled = true;
+            show = true;
+        } else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            rend.enabled = false;
+            show = false;
+        }
         FindClosesetTarget();
     }
 

@@ -48,15 +48,34 @@ public class CloneController : MonoBehaviour {
         pointsInTime = new List<PointInTime>();
         GameEvents.current.onSendPointsInTime += SetClonePositionInTime;
         GameEvents.current.onRoundEnd += ResetClone;
+        GameEvents.current.onWin += StopClone;
+        GameEvents.current.onGameOver += StopClone;
+
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         flashlight = GameObject.Find("FirstPersonPlayer").GetComponent<Flashlight>();
 
 
     }
+    void StopClone()
+    {
+        GameEvents.current.onWin -= StopClone;
+        GameEvents.current.onGameOver -= StopClone;
+        state = CloneState.STOPPED;
+    }
 
     
 
-    private void ResetClone(int cloneID) {
+    private void ResetClone(int roundNum) {
+        if (cloneID < roundNum - RoundManager.maxClones)
+        {
+            Debug.Log("Destroy clone " + cloneID);
+            Destroy(gameObject);
+            GameEvents.current.onSendPointsInTime -= SetClonePositionInTime;
+            GameEvents.current.onRoundEnd -= ResetClone;
+            GameEvents.current.onWin -= StopClone;
+            GameEvents.current.onGameOver -= StopClone;
+            return;
+        }
         posIndex = 0;
     }
 
@@ -238,6 +257,7 @@ public class CloneController : MonoBehaviour {
             spottedTime = 0f;
             GameEvents.current.PlayerSafe();
         }
+        
 
     }
 

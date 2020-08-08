@@ -21,6 +21,14 @@ public class IntroText : MonoBehaviour
         StartCoroutine(PlayIntro());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        }
+    }
     public Text textBox;
     IEnumerator PlayIntro()
     {

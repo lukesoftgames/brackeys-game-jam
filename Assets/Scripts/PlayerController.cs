@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.TerrainAPI;
 
 public class PlayerController : MonoBehaviour {
     private Vector3 newPos;
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float shakeDecrease = 0.3f;
 
     [SerializeField] private float volumeIncrease = 0.1f;
-
+    public AudioSource dong;
 
     private float timeLeft;
     Coroutine spotted;
@@ -20,8 +21,11 @@ public class PlayerController : MonoBehaviour {
 
     public AudioSource rumble;
     public AudioSource thump;
-    public Vector3 respawnArea;
+    public Vector3 respawnAreaStart;
+    public Vector3 respawnAreaEnd;
 
+
+    public LayerMask layerMask;
     private void Start() {
         rumble.volume = 0f;
         pointsInTime = new List<PointInTime>();
@@ -77,9 +81,11 @@ public class PlayerController : MonoBehaviour {
             yield return null;
         }
         CameraShake.current.StopShake();
+        spotted = null;
     }
     void PlayerSafe()
     {
+       
         if (spotted != null)
         {
             StopCoroutine(spotted);
@@ -90,6 +96,7 @@ public class PlayerController : MonoBehaviour {
 
     void PlayerSpotted()
     {
+        dong.Play();
         if (!rumble.isPlaying)
         {
             rumble.Play();
@@ -104,7 +111,8 @@ public class PlayerController : MonoBehaviour {
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(respawnArea / 2, respawnArea);
+        Vector3 respawnArea = respawnAreaEnd - respawnAreaStart;
+        Gizmos.DrawWireCube(respawnAreaStart + respawnArea / 2, respawnArea);
     }
 
     private void ResetPosition(int roundNum) {
@@ -112,7 +120,17 @@ public class PlayerController : MonoBehaviour {
         pointsInTime.Add(new PointInTime(this.transform.position, this.transform.rotation));
         GameEvents.current.SendPointsInTime(roundNum, pointsInTime);
         Debug.Log("new position");
-        newPos = new Vector3(Random.Range(0f, respawnArea.x), 2f, Random.Range(0f, respawnArea.z));
+        
+        newPos = new Vector3(Random.Range(respawnAreaStart.x, respawnAreaEnd.x), 2000f, Random.Range(respawnAreaStart.z, respawnAreaEnd.z));
+
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask))
+        {
+            newPos.y = hit.point.y + 5f;
+        } else
+        {
+            newPos.y = 2f;
+        }
         cc.enabled = false;
         this.transform.localPosition= newPos;
         cc.enabled = true;

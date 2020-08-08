@@ -8,6 +8,7 @@ public class GameOverScreen : MonoBehaviour
 
     public GameObject gameOverScreen;
     public Text gameOverText;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class GameOverScreen : MonoBehaviour
 
     void Win()
     {
+        audioSource.Play();
         gameOverText.text = "YOU ESCAPED THE FOREST!";
         Show();
     }

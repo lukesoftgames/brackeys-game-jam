@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoundManager : MonoBehaviour {
     public static RoundManager current { get; private set; }
     private int roundNum;
+    public static int maxClones = 5;
     public GameObject[] targetsObjects;
     private List<GameObject> targets;
     [SerializeField] private GameObject clone;
@@ -25,16 +26,28 @@ public class RoundManager : MonoBehaviour {
     private void Start() {
         roundNum = 0;
         GameEvents.current.onFlash += EndRound;
+
         GameEvents.current.onPickup += CheckCar;
         targets = new List<GameObject>();
         //car.GetComponent<CarTarget>().enabled = false;
+        int maxAttempts = 20;
         foreach (GameObject t in targetsObjects) {
-            GameObject curTarget = Instantiate(t, new Vector3(Random.Range(0f, border), 200f, Random.Range(0f, border)), Quaternion.identity);
+            int i = 0;
+            Vector3 pos;
+            pos = new Vector3(Random.Range(10f, border - 10f), 2f, Random.Range(10f, border - 10f));
+            while(!Physics.CheckSphere(pos, 0.25f) && i < maxAttempts)
+            {
+                pos = new Vector3(Random.Range(10f, border - 10f), 2f, Random.Range(10f, border - 10f));
+                i++;
+            }
+            pos.y = 200f;
+            GameObject curTarget = Instantiate(t,pos, Quaternion.identity);
             targets.Add(curTarget);
             //curTarget.transform.position = curTarget.transform.position+ new Vector3(Random.Range(0f, border), 0f, Random.Range(0f, border));
         }
     }
 
+   
     private void CheckCar(GameObject curObj) {
 
         targets.Remove(curObj);
