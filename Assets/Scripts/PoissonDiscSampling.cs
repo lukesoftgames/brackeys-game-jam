@@ -30,6 +30,10 @@ public static class PoissonDiscSampling
 	}
 	public static List<Vector2> GeneratePoints(float radius, Vector2 sampleStart, Vector2 sampleEnd, Shape shape, int numSamplesBeforeRejection = 30)
 	{
+		foreach(Vector3 p in shape.points)
+        {
+			Debug.Log(p);
+        }
 		float cellSize = radius / Mathf.Sqrt(2);
 		Vector2 sampleRegionSize = sampleStart - sampleEnd;
 		int[,] grid = new int[Mathf.CeilToInt(sampleRegionSize.x / cellSize), Mathf.CeilToInt(sampleRegionSize.y / cellSize)];

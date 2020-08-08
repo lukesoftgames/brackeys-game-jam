@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShapeCreator : MonoBehaviour
 {
 
-    [HideInInspector]
     public List<Shape> shapes = new List<Shape>();
 
     public float handleRadius = .5f;

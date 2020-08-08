@@ -45,6 +45,7 @@ public class TreeCreator : MonoBehaviour
                     right = v.x;
                 }
             }
+            Debug.Log(shape.GetHashCode());
             points = PoissonDiscSampling.GeneratePoints(radius, new Vector2(left, top), new Vector2(right, bottom), shape, rejectionSamples);
             foreach (Vector2 point in points)
             {
