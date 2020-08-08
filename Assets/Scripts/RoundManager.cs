@@ -8,7 +8,7 @@ public class RoundManager : MonoBehaviour {
     public GameObject[] targetsObjects;
     private List<GameObject> targets;
     [SerializeField] private GameObject clone;
-    private float border = 100f;
+    [SerializeField] private float border = 500f;
     private bool goToCar;
     public GameObject car;
     private void Awake() {
